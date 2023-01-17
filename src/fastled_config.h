@@ -1,6 +1,9 @@
 #ifndef __INC_FASTLED_CONFIG_H
 #define __INC_FASTLED_CONFIG_H
 
+#define FASTLED_ALL_PINS_HARDWARE_SPI
+#include <SPI.h>
+
 #include "FastLED.h"
 
 /// @file fastled_config.h
@@ -73,7 +76,7 @@
 /// Use this toggle to enable global brightness in contollers that support is (e.g. ADA102 and SK9822).
 /// It changes how color scaling works and uses global brightness before scaling down color values.
 /// This enables much more accurate color control on low brightness settings.
-//#define FASTLED_USE_GLOBAL_BRIGHTNESS 1
+#define FASTLED_USE_GLOBAL_BRIGHTNESS 1
 
 
 // The defines are used for Doxygen documentation generation.
