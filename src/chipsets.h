@@ -219,7 +219,7 @@ class APA102Controller : public CPixelLEDController<RGB_ORDER> {
 	SPI mSPI;
 
 	void startBoundary() { mSPI.writeWord(0); mSPI.writeWord(0); }
-	void endBoundary(int nLeds) { int nDWords = (nLeds/32); do { mSPI.writeByte(0xFF); mSPI.writeByte(0x00); mSPI.writeByte(0x00); mSPI.writeByte(0x00); } while(nDWords--); }
+	void endBoundary(int nLeds) { mSPI.writeWord(0xffff); mSPI.writeWord(0xffff); }
 
 	inline void writeLed(uint8_t brightness, uint8_t b0, uint8_t b1, uint8_t b2) __attribute__((always_inline)) {
 #ifdef FASTLED_SPI_BYTE_ONLY
