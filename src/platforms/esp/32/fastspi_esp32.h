@@ -88,6 +88,7 @@ public:
 		// set the pins to output and make sure the select is released (which apparently means hi?  This is a bit
 		// confusing to me)
 		ledSPI.begin(spiClk, spiMiso, spiMosi, spiCs);
+		ledSPI.setHwCs(true);
 		release();
 	}
 
