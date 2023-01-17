@@ -2,6 +2,7 @@
 #define __INC_FASTLED_CONFIG_H
 
 #define FASTLED_ALL_PINS_HARDWARE_SPI
+#define BAZZ_SPI_ESP32
 #include <SPI.h>
 
 #include "FastLED.h"
