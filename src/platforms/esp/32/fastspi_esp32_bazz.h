@@ -84,7 +84,7 @@ public:
             .cs_ena_posttrans = 2,
             .clock_speed_hz = SPI_SPEED,
             .input_delay_ns = 0,
-            .spics_io_num = spiCs,  // VSPI
+            .spics_io_num = -1, //spiCs,  // VSPI
             .flags = SPI_DEVICE_NO_DUMMY | SPI_DEVICE_HALFDUPLEX,
             .queue_size = NUM_DMA_BUFS,
             .pre_cb = NULL,
