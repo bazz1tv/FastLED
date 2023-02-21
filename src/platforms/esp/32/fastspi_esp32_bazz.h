@@ -9,6 +9,12 @@ FASTLED_NAMESPACE_BEGIN
  * ESP32 Hardware SPI Driver w/ DMA
  *
  * Copyright (c) 2023 Bazz1TV
+ *
+ * If you want to enable CS (for debugging purposes or otherwise), add the following
+ * line before including FastLED.h:
+ *
+ * #define FASTLED_ESP32_SPI_ENABLE_CS
+ *
  */
 
 #ifndef FASTLED_ESP32_SPI_BUS
@@ -84,7 +90,11 @@ public:
             .cs_ena_posttrans = 2,
             .clock_speed_hz = SPI_SPEED,
             .input_delay_ns = 0,
-            .spics_io_num = -1, //spiCs,  // VSPI
+#ifdef FASTLED_ESP32_SPI_ENABLE_CS
+            .spics_io_num = spiCs,
+#else
+            .spics_io_num = -1,
+#endif
             .flags = SPI_DEVICE_NO_DUMMY | SPI_DEVICE_HALFDUPLEX,
             .queue_size = NUM_DMA_BUFS,
             .pre_cb = NULL,

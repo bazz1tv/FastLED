@@ -3,6 +3,7 @@
 
 #define FASTLED_ALL_PINS_HARDWARE_SPI
 #define BAZZ_SPI_ESP32
+#define FASTLED_ESP32_SPI_ENABLE_CS
 #include <SPI.h>
 
 #include "FastLED.h"
