@@ -18,9 +18,15 @@ FASTLED_NAMESPACE_BEGIN
  */
 
 #ifndef FASTLED_ESP32_SPI_BUS
-    #define FASTLED_ESP32_SPI_BUS VSPI
+    #define FASTLED_ESP32_SPI_BUS FSPI
 #endif
 
+/* TODO: each variable declaration in the following definitions should be ifndef'd
+ * FSPI should not use VSPI_HOST as default.
+ * All configs should use DATA_PIN and CLOCK_PIN
+ * Perhaps include differentiation between iomux and gpiomux. use a static assert
+ * on iomux to ensure the proper pins are selected 
+*/
 #if FASTLED_ESP32_SPI_BUS == VSPI
     static uint8_t spiClk = 18;
     static uint8_t spiMiso = 19;
@@ -37,8 +43,10 @@ FASTLED_NAMESPACE_BEGIN
     #define spiMosi DATA_PIN
     #define spiClk CLOCK_PIN
     #define spiMiso -1
+#ifndef spiCs
     #define spiCs -1
-    #define FASTLED_ESP32_SPI_HOST HSPI_HOST
+#endif
+    #define FASTLED_ESP32_SPI_HOST VSPI_HOST
 #endif
 
 #define NUM_DMA_BUFS 2
@@ -77,7 +85,7 @@ public:
             .quadwp_io_num = -1,
             .quadhd_io_num = -1,
             .max_transfer_sz = DMA_BUF_SIZE,
-            .flags = SPICOMMON_BUSFLAG_MASTER | SPICOMMON_BUSFLAG_IOMUX_PINS,
+            .flags = SPICOMMON_BUSFLAG_MASTER, // | SPICOMMON_BUSFLAG_IOMUX_PINS,
         };
 
         spi_device_interface_config_t devcfg {
